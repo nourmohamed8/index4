@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team</title>
+    <link rel="stylesheet" href="new.css">
+</head>
+<body>
+    <header>
+        <div>
+            <div class="navbar">
+                <b>Our Team</b>
+                <div class="nav-links">
+                    <div>Home</div>
+                    <div>Team</div>
+                    <div>Stats</div>
+                    <div>Contact</div>
+                </div>
+            </div>
+            
+            <div>
+                <h1>Our Professional Team</h1>
+                <p>We are a team of skilled professionals in development and design, working together to provide the best technical solutions for our clients.</p>
+            </div>
+        </div>
+    </header>
+    
+    <h2>Team Members</h2>
+    
+    <div class="member-controls">
+        <button id="add-member-btn">Add member card</button>
+        <button id="remove-last-btn">Remove Last card</button>
+    </div>
+
+    <div id="member-form">
+        <h3>Add New Team Member</h3>
+        <input type="text" id="member-name" placeholder="Full Name">
+        <input type="text" id="member-role" placeholder="Position/Role">
+        <input type="text" id="member-description" placeholder="Short Description">
+        <input type="text" id="member-skills" placeholder="Skills (comma separated)">
+        <input type="text" id="member-image" placeholder="Image URL" value="https://placehold.co/300">
+        <button id="submit-member">Add Member</button>
+    </div>
+    
+    <section class="team-members">
+        <div class="member">
+            <img class="img" src="https://i.insider.com/6113dab3ad63f300195026b2?width=600&format=jpeg&auto=webp" alt="John Smith">
+            <h3>John Smith</h3>
+            <p class="role">Lead Web Developer</p>
+            <p class="sum">Specialized in web application development using modern technologies like React and Node.js. Over 5 years of experience in the field.</p>
+            <div class="skills">
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JavaScript</span>
+                <span>React</span>
+            </div>
+            <button>View Profile</button>
+            <button class="contact-button">Contact</button>
+        </div>
+        <div class="member">
+            <img src="https://www.hjphysicaltherapy.com/wp-content/uploads/2023/05/Sarah-Johnson-FINAL-e1685540471864-1536x1536.jpg" alt="Sarah Johnson">
+            <h3>Sarah Johnson</h3>
+            <p class="role">UI/UX Designer</p>
+            <p class="sum">Specialized in user experience and interface design. Works on improving user experience and making applications more user-friendly.</p>
+            <div class="skills">
+                <span>UI Design</span>
+                <span>UX Research</span>
+                <span>Prototyping</span>
+                <span>Figma</span>
+            </div>
+            <button>View Profile</button>
+            <button class="contact-button">Contact</button>
+        </div>
+        <div class="member">
+            <img src="https://hwfisher.co.uk/app/uploads/2022/11/Fraser_Michael-14922-036-a.jpg" alt="Michael Brown">
+            <h3>Michael Brown</h3>
+            <p class="role">Mobile App Developer</p>
+            <p class="sum">Expert in mobile app development using React Native and Flutter. Focuses on building high-performance, user-friendly applications.</p>
+            <div class="skills">
+                <span>React Native</span>
+                <span>Flutter</span>
+                <span>Mobile UI</span>
+                <span>Firebase</span>
+            </div>
+            <button>View Profile</button>
+            <button class="contact-button">Contact</button>
+        </div>
+    </section>
+
+    <div class="stats">
+        <h2 class="heading">Our Team Stats</h2>
+        <p class="num">15+ <br><br> Combined Years of Experience</p>
+        <p class="num">50+ <br><br> Completed Projects</p>
+        <p class="num">10+ <br><br> Mastered Technologies</p>
+        <p class="num">100% <br><br> Client Satisfaction</p>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Our Team. All rights reserved.</p>
+        <p>Email: team@gmail.com | Phone: 09440004</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        const addMemberBtn = document.getElementById('add-member-btn');
+        const removeLastBtn = document.getElementById('remove-last-btn');
+        const memberForm = document.getElementById('member-form');
+        const submitMemberBtn = document.getElementById('submit-member');
+        const teamMembersSection = document.querySelector('.team-members');
+
+        // Show/hide add member form
+        addMemberBtn.addEventListener('click', function() {
+            memberForm.style.display = memberForm.style.display === 'none' ? 'block' : 'none';
+        });
+
+        // Add new member
+        submitMemberBtn.addEventListener('click', function() {
+            const name = document.getElementById('member-name').value.trim();
+            const role = document.getElementById('member-role').value.trim();
+            const description = document.getElementById('member-description').value.trim();
+            const skillsInput = document.getElementById('member-skills').value.trim();
+            const image = document.getElementById('member-image').value.trim();
+
+            if (!name || !role || !description || !skillsInput) {
+                alert('Please fill all fields');
+                return;
+            }
+
+            const skills = skillsInput.split(',').map(skill => skill.trim()).filter(skill => skill);
+
+            const memberDiv = document.createElement('div');
+            memberDiv.className = 'member';
+            memberDiv.innerHTML = `
+                <img src="${image || 'https://placehold.co/300'}" alt="${name} - ${role}">
+                <h3>${name}</h3>
+                <p class="role">${role}</p>
+                <p class="sum">${description}</p>
+                <button>View Profile</button>
+                <button class="contact-button">Contact</button>
+            `;
+
+            teamMembersSection.appendChild(memberDiv);
+            
+            // Reset form
+            document.getElementById('member-form').reset();
+            memberForm.style.display = 'none';
+        });
+
+        // Remove last member
+        removeLastBtn.addEventListener('click', function() {
+            const members = document.querySelectorAll('.member');
+            if (members.length > 0) {
+                members[members.length - 1].remove();
+            } else {
+                alert('No members to remove');
+            }
+        });
+    });
+    </script>
+</body>
+</html>
